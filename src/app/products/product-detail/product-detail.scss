@@ -1,0 +1,169 @@
+.detail-container {
+  width: 100%;
+  padding: 30px;
+  box-sizing: border-box;
+}
+
+.product-detail-card {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.product-info {
+  margin-top: 30px;
+}
+
+.info-row {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 25px;
+  font-size: 18px;
+}
+
+.label {
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.product-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 16px 24px;
+  box-sizing: border-box;
+}
+
+.product-detail-photo {
+  width: 100%;
+  max-width: 600px;
+  height: 350px;
+  margin: 20px auto;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.product-detail-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Meldung nach einer Warenkorb-Aktion */
+.success-message,
+.error-message {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px 18px;
+  margin: 16px 0;
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Erfolgsmeldung */
+.success-message {
+  color: #216e39;
+  background-color: #eaf7ed;
+  border: 1px solid #b7e2c0;
+}
+
+/* Fehlermeldung */
+.error-message {
+  color: #a61b1b;
+  background-color: #fff0f0;
+  border: 1px solid #f0b8b8;
+
+  p {
+    margin: 0;
+  }
+
+  button {
+    align-self: flex-start;
+    margin-top: 4px;
+    border-radius: 6px;
+    font-weight: 500;
+  }
+}
+
+/* Hover-Effekt für den Anmeldebutton */
+.error-message button:hover {
+  filter: brightness(1.08);
+}
+
+/* Responsive Darstellung auf kleinen Bildschirmen */
+@media (max-width: 600px) {
+  .success-message,
+  .error-message {
+    padding: 12px;
+    font-size: 13px;
+  }
+}
+
+.photo-preview {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.product-photo {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.error-message {
+  color: #d32f2f;
+}
+
+.product-gallery {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  margin: 20px auto 8px;
+}
+
+.product-detail-photo {
+  width: 100%;
+  max-width: 500px;
+  height: 350px;
+  flex: 1;
+  overflow: hidden;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.product-detail-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.product-gallery button {
+  flex-shrink: 0;
+}
+
+.photo-counter {
+  text-align: center;
+  color: #666;
+  font-size: 14px;
+  margin: 8px 0 20px;
+}
+
+@media (max-width: 600px) {
+  .product-gallery {
+    gap: 2px;
+  }
+
+  .product-detail-photo {
+    height: 240px;
+  }
+}

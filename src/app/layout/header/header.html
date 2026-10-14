@@ -1,0 +1,119 @@
+<mat-toolbar
+  class="app-header">
+
+  <div class="app-title">
+    FingA
+  </div>
+
+  <span class="spacer"></span>
+
+  <div class="app-user">
+
+    <!-- Shops -->
+    <a
+      mat-button
+      routerLink="/shops">
+
+      <mat-icon>store</mat-icon>
+      Shops
+
+    </a>
+
+
+    <!-- Nur ADMIN -->
+    @if (isAdminUser) {
+
+      <a
+        mat-button
+        routerLink="/users">
+
+        <mat-icon>group</mat-icon>
+        Benutzer
+
+      </a>
+
+    }
+
+
+    <!-- Gast -->
+    @if (!isAuthenticated) {
+
+      <button
+        mat-button
+        type="button"
+        (click)="login()">
+
+        <mat-icon>login</mat-icon>
+        Login
+
+      </button>
+
+    }
+
+
+    <!-- Eingeloggt -->
+    @if (isAuthenticated) {
+
+      <button
+        mat-button
+        type="button"
+        [matMenuTriggerFor]="userMenu">
+
+        <mat-icon>person</mat-icon>
+
+        {{ currentUser?.username || 'Benutzer' }}
+
+      </button>
+
+    }
+
+  </div>
+
+</mat-toolbar>
+
+
+<!-- Benutzer-Menü -->
+
+<mat-menu #userMenu="matMenu">
+
+  @if (currentUser) {
+
+    <button
+      mat-menu-item
+      disabled>
+
+      <mat-icon>person</mat-icon>
+
+      <span>
+        {{ currentUser.username }}
+      </span>
+
+    </button>
+
+    <button
+      mat-menu-item
+      disabled>
+
+      <mat-icon>email</mat-icon>
+
+      <span>
+        {{ currentUser.email }}
+      </span>
+
+    </button>
+
+  }
+
+  <button
+    mat-menu-item
+    (click)="logout()">
+
+    <mat-icon>logout</mat-icon>
+
+    <span>
+      Logout
+    </span>
+
+  </button>
+
+</mat-menu>

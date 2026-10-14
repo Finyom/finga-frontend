@@ -1,0 +1,150 @@
+<mat-card class="cart-card">
+  <mat-card-header>
+    <mat-card-title>
+      <mat-icon>shopping_cart</mat-icon>
+      Mein Warenkorb
+    </mat-card-title>
+
+    <mat-card-subtitle>
+      Deine Produkte im ausgewählten Shop
+    </mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <!-- Ladeanzeige -->
+    <div class="loading-container" *ngIf="loading">
+      <p>Warenkorb wird geladen ...</p>
+    </div>
+
+    <!-- Fehlermeldung mit Login-Button -->
+    <div
+      class="message error-message"
+      *ngIf="errorMessage"
+      role="alert">
+
+      <p>{{ errorMessage }}</p>
+
+      <button
+        *ngIf="errorMessage.includes('anmelden')"
+        mat-raised-button
+        color="primary"
+        type="button"
+        (click)="goToLogin()">
+
+        <mat-icon>login</mat-icon>
+        Zur Anmeldung
+      </button>
+    </div>
+
+    <!-- Erfolgsmeldung -->
+    <div
+      class="message success-message"
+      *ngIf="successMessage"
+      role="status">
+
+      {{ successMessage }}
+    </div>
+
+    <!-- Warenkorb anzeigen -->
+    <ng-container *ngIf="!loading && cart">
+
+      <!-- Leerer Warenkorb -->
+      <div
+        class="empty-cart"
+        *ngIf="cart.items.length === 0">
+
+        <mat-icon>remove_shopping_cart</mat-icon>
+        <h3>Dein Warenkorb ist leer</h3>
+        <p>Füge Produkte hinzu, um sie hier anzuzeigen.</p>
+      </div>
+
+      <!-- Produkte im Warenkorb -->
+      <div
+        class="cart-items"
+        *ngIf="cart.items.length > 0">
+
+        <div
+          class="cart-item"
+          *ngFor="let item of cart.items">
+
+          <div class="product-info">
+            <h3>{{ item.productName }}</h3>
+
+            <p class="shop-name">
+              Shop: {{ item.shopName }}
+            </p>
+
+            <p>
+              Preis pro Stück:
+              {{ item.price | currency:'EUR':'symbol':'1.2-2':'de-DE' }}
+            </p>
+
+            <p>
+              Im Warenkorb:
+              <strong>{{ item.quantity }} Stück</strong>
+            </p>
+
+            <p class="line-total">
+              Zwischensumme:
+              {{ item.lineTotal | currency:'EUR':'symbol':'1.2-2':'de-DE' }}
+            </p>
+          </div>
+
+          <!-- Menge entfernen -->
+          <div class="remove-controls">
+            <mat-form-field appearance="outline">
+              <mat-label>Menge entfernen</mat-label>
+
+              <input
+                matInput
+                type="number"
+                min="1"
+                [max]="item.quantity"
+                [ngModel]="removeQuantities[item.productId]"
+                (ngModelChange)="setRemoveQuantity(item.productId, $event)"
+              />
+
+              <mat-hint>
+                Max. {{ item.quantity }} Stück
+              </mat-hint>
+            </mat-form-field>
+
+            <button
+              mat-flat-button
+              color="warn"
+              type="button"
+              [disabled]="loading"
+              (click)="removeItem(item)">
+
+              <mat-icon>delete</mat-icon>
+              Entfernen
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gesamtpreis -->
+      <div
+        class="cart-total"
+        *ngIf="cart.items.length > 0">
+
+        <span>Gesamtpreis</span>
+
+        <strong>
+          {{ cart.total | currency:'EUR':'symbol':'1.2-2':'de-DE' }}
+        </strong>
+      </div>
+
+    </ng-container>
+  </mat-card-content>
+</mat-card>
+
+<!-- Zurück-Button -->
+<button
+  mat-raised-button
+  type="button"
+  (click)="goBack()">
+
+  <mat-icon>arrow_back</mat-icon>
+  Zurück
+</button>

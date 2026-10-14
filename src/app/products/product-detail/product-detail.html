@@ -1,0 +1,144 @@
+<div class="detail-container">
+
+  <!-- Meldung nach einer Warenkorb-Aktion -->
+  @if (cartMessage) {
+    <div class="success-message" role="status">
+      {{ cartMessage }}
+    </div>
+  }
+
+  @if (cartError) {
+    <div class="error-message" role="alert">
+      <p>{{ cartError }}</p>
+
+      @if (cartError.includes('registrieren')) {
+        <button
+          mat-raised-button
+          color="primary"
+          type="button"
+          (click)="goToLogin()">
+          Zur Anmeldung
+        </button>
+      }
+    </div>
+  }
+
+  @if (product) {
+
+    <mat-card class="product-detail-card">
+
+      <mat-card-header>
+        <mat-card-title>
+          {{ product.name }}
+        </mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content>
+
+        <!-- Produktfoto-Galerie -->
+        <div class="product-gallery">
+
+        @if (getProductPhotos().length > 0) {
+
+            <!-- Linker Pfeil -->
+            <button
+            mat-icon-button
+            type="button"
+            aria-label="Vorheriges Foto"
+            [disabled]="getProductPhotos().length <= 1"
+            (click)="previousPhoto()">
+            <mat-icon>chevron_left</mat-icon>
+            </button>
+
+            <!-- Aktuelles Foto -->
+            <div class="product-detail-photo">
+            <img
+                [src]="currentPhotoUrl()"
+                [alt]="product.name">
+            </div>
+
+            <!-- Rechter Pfeil -->
+            <button
+            mat-icon-button
+            type="button"
+            aria-label="Nächstes Foto"
+            [disabled]="getProductPhotos().length <= 1"
+            (click)="nextPhoto()">
+            <mat-icon>chevron_right</mat-icon>
+            </button>
+
+        } @else {
+
+            <div class="product-detail-photo">
+            <img
+                src="assets/default-product.jpg"
+                [alt]="product.name">
+            </div>
+
+        }
+
+        </div>
+
+        @if (getProductPhotos().length > 0) {
+        <p class="photo-counter">
+            Foto {{ currentPhotoIndex + 1 }} von {{ getProductPhotos().length }}
+        </p>
+        }
+
+      </mat-card-content>
+
+      <button
+              mat-raised-button
+              color="primary"
+              type="button"
+              [disabled]="product.stock <= 0 || addingProductId === product.id"
+              (click)="$event.stopPropagation(); addToCart(product.id)">
+
+              <mat-icon>add_shopping_cart</mat-icon>
+
+              @if (addingProductId === product.id) {
+                Wird hinzugefügt...
+              } @else {
+                In den Warenkorb
+              }
+        </button>
+
+      <mat-card-actions class="product-actions">
+
+        @if (canDeleteProduct()) {
+          <button
+            mat-raised-button
+            color="warn"
+            type="button"
+            (click)="deleteProduct(product.id, $event)">
+
+            <mat-icon>delete</mat-icon>
+            Löschen
+          </button>
+        }
+
+        @if (canEditProduct()) {
+          <button
+            mat-raised-button
+            type="button"
+            (click)="editProduct()">
+            Bearbeiten
+          </button>
+        }
+
+      </mat-card-actions>
+
+    </mat-card>
+
+  } @else {
+    <p>Produkt wird geladen...</p>
+  }
+
+  <button
+    mat-raised-button
+    type="button"
+    (click)="goBack()">
+    Zurück
+  </button>
+
+</div>

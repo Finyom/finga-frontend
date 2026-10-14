@@ -1,0 +1,135 @@
+<div class="login-container">
+  <mat-card class="login-card">
+
+    @if (!isRegisterMode) {
+
+      <!-- LOGIN -->
+
+      <mat-card-header>
+        <mat-card-title>Finga</mat-card-title>
+        <mat-card-subtitle>Anmelden</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+
+        <form (ngSubmit)="onLogin()">
+
+          <mat-form-field appearance="outline">
+            <mat-label>Username oder E-Mail</mat-label>
+
+            <input
+              matInput
+              type="text"
+              name="login"
+              [(ngModel)]="login"
+              required
+            />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Passwort</mat-label>
+
+            <input
+              matInput
+              type="password"
+              name="password"
+              [(ngModel)]="password"
+              required
+            />
+          </mat-form-field>
+
+          <button
+            mat-flat-button
+            type="submit">
+            Anmelden
+          </button>
+
+        </form>
+
+      </mat-card-content>
+
+      <mat-card-actions>
+        <span>Noch kein Konto?</span>
+
+        <button
+          mat-button
+          type="button"
+          (click)="showRegister()">
+          Registrieren
+        </button>
+      </mat-card-actions>
+
+    } @else {
+
+      <!-- REGISTRIERUNG -->
+
+      <mat-card-header>
+        <mat-card-title>Finga</mat-card-title>
+        <mat-card-subtitle>Registrierung</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+
+        <form (ngSubmit)="onRegister()">
+
+          <mat-form-field appearance="outline">
+            <mat-label>Username</mat-label>
+
+            <input
+              matInput
+              type="text"
+              name="username"
+              [(ngModel)]="username"
+              required
+            />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>E-Mail</mat-label>
+
+            <input
+              matInput
+              type="email"
+              name="email"
+              [(ngModel)]="email"
+              required
+            />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Passwort</mat-label>
+
+            <input
+              matInput
+              type="password"
+              name="registerPassword"
+              [(ngModel)]="registerPassword"
+              required
+            />
+          </mat-form-field>
+
+          <button
+            mat-flat-button
+            type="submit">
+            Registrieren
+          </button>
+
+        </form>
+
+      </mat-card-content>
+
+      <mat-card-actions>
+        <span>Bereits ein Konto?</span>
+
+        <button
+          mat-button
+          type="button"
+          (click)="showLogin()">
+          Zum Login
+        </button>
+      </mat-card-actions>
+
+    }
+
+  </mat-card>
+</div>

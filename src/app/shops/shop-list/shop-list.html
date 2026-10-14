@@ -1,0 +1,198 @@
+
+<div class="shop-container">
+
+  <!-- Header -->
+  <div class="shop-header">
+
+    <div class="title-section">
+
+      <h1>Meine Shops</h1>
+
+      @if (isAdmin) {
+        <button
+          mat-raised-button
+          (click)="addShop()">
+
+          Shop hinzufügen
+
+        </button>
+      }
+
+    </div>
+
+    <!-- Suche -->
+    <mat-form-field
+      appearance="outline"
+      class="search-field">
+
+      <mat-label>Shops suchen</mat-label>
+
+      <mat-icon matPrefix>
+        search
+      </mat-icon>
+
+      <input
+        matInput
+        type="text"
+        [(ngModel)]="searchText"
+        placeholder="Shop suchen..." />
+
+      @if (searchText) {
+
+        <button
+          mat-icon-button
+          matSuffix
+          type="button"
+          (click)="searchText = ''">
+
+          <mat-icon>
+            close
+          </mat-icon>
+
+        </button>
+
+      }
+
+    </mat-form-field>
+
+  </div>
+
+
+  <!-- Anzahl Shops -->
+  <mat-card class="count-card">
+
+    <mat-card-content>
+
+      <strong>
+        {{ filteredShops.length }}
+      </strong>
+
+      Shops gefunden
+
+    </mat-card-content>
+
+  </mat-card>
+
+
+  <!-- Keine Shops -->
+  @if (filteredShops.length === 0) {
+
+    <mat-card class="empty-card">
+
+      <mat-card-content>
+
+        <mat-icon>
+          store
+        </mat-icon>
+
+        <p>
+          Keine Shops gefunden.
+        </p>
+
+      </mat-card-content>
+
+    </mat-card>
+
+  }
+
+
+  <!-- Shops vorhanden -->
+  @else {
+
+    <div class="shop-list">
+
+      @for (shop of filteredShops; track shop.id) {
+
+        <mat-card
+          class="shop-card"
+          (click)="openProducts(shop.id)">
+
+            <!-- Shop Foto als Hintergrund -->
+            <div
+                class="shop-photo"
+                [style.background-image]="'url(' + photoUrl(shop) + ')'">
+
+                <!-- Dunkle Überlagerung für bessere Lesbarkeit -->
+                <div class="shop-photo-overlay"></div>
+
+                <!-- Shop Informationen -->
+                <div class="shop-info">
+
+                    <mat-card-title>
+                    {{ shop.name }}
+                    </mat-card-title>
+
+                    <mat-card-subtitle>
+                    {{ shop.address }}
+                    </mat-card-subtitle>
+
+                    <p>
+                    {{ shop.description }}
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+          <!-- Buttons -->
+          <mat-card-actions align="end">
+
+            @if (isAdmin) {
+
+              <button
+                mat-raised-button
+                type="button"
+                (click)="$event.stopPropagation(); editShop(shop.id)">
+
+                <mat-icon>
+                  edit
+                </mat-icon>
+
+                Bearbeiten
+
+              </button>
+
+
+              <button
+                mat-raised-button
+                color="warn"
+                type="button"
+                (click)="deleteShop(shop.id, $event)">
+
+                <mat-icon>
+                  delete
+                </mat-icon>
+
+                Löschen
+
+              </button>
+
+            }
+
+
+            <button
+              mat-raised-button
+              type="button"
+              (click)="$event.stopPropagation(); openProducts(shop.id)">
+
+              <mat-icon>
+                inventory_2
+              </mat-icon>
+
+              Produkte
+
+            </button>
+
+          </mat-card-actions>
+
+        </mat-card>
+
+      }
+
+    </div>
+
+  }
+
+</div>

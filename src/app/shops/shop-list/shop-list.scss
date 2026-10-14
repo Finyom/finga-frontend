@@ -1,0 +1,144 @@
+.shop-container {
+  padding: 24px;
+}
+
+.shop-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 20px;
+}
+
+.shop-header h1 {
+  margin: 0;
+}
+
+.search-field {
+  width: 320px;
+}
+
+.count-card {
+  margin-bottom: 20px;
+}
+
+.count-card mat-card-content {
+  padding: 16px;
+}
+
+.empty-card {
+  text-align: center;
+  padding: 30px;
+}
+
+.empty-card mat-icon {
+  font-size: 40px;
+  width: 40px;
+  height: 40px;
+}
+
+.shop-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.shop-card {
+  width: 100%;
+}
+
+.shop-card {
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.shop-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.shop-card mat-card-content {
+  padding-top: 16px;
+}
+
+.shop-card p {
+  margin: 0;
+}
+
+.title-section {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.title-section h1 {
+  margin: 0;
+}
+
+.add-shop-card {
+  margin-bottom: 20px;
+}
+
+.full-width {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.shop-photo {
+  position: relative;
+
+  width: 100%;
+  height: 300px;
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  border-radius: 8px 8px 0 0;
+
+  overflow: hidden;
+}
+
+.shop-photo-overlay {
+  position: absolute;
+
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.shop-info {
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  padding: 20px;
+
+  color: white;
+
+  z-index: 1;
+}
+
+.shop-info mat-card-title {
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.shop-info mat-card-subtitle {
+  color: white;
+  opacity: 0.9;
+  margin-top: 5px;
+}
+
+.shop-info p {
+  margin-top: 10px;
+  margin-bottom: 0;
+
+  color: white;
+}

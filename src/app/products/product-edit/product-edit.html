@@ -1,0 +1,189 @@
+<div class="edit-container">
+
+  @if (!loading) {
+
+    <mat-card class="edit-card">
+
+      <mat-card-header>
+
+        <mat-card-title>
+          Produkt bearbeiten
+        </mat-card-title>
+
+      </mat-card-header>
+
+
+      <mat-card-content>
+
+        <form>
+
+            <!-- Produktfotos als Galerie -->
+            <div class="photo-section">
+            <h3>Produktfotos</h3>
+
+            @if (photoPreviews.length > 0) {
+                <div class="photo-gallery">
+
+                <!-- Pfeil links -->
+                <button
+                    mat-icon-button
+                    type="button"
+                    class="gallery-arrow"
+                    aria-label="Vorheriges Foto"
+                    [disabled]="photoPreviews.length <= 1"
+                    (click)="previousPhoto()">
+                    &#10094;
+                </button>
+
+                <!-- Aktuelles Foto -->
+                <div class="photo-preview">
+                    <img
+                    [src]="photoPreviews[currentPhotoIndex]"
+                    alt="Produktfoto"
+                    class="product-photo">
+                </div>
+
+                <!-- Pfeil rechts -->
+                <button
+                    mat-icon-button
+                    type="button"
+                    class="gallery-arrow"
+                    aria-label="Nächstes Foto"
+                    [disabled]="photoPreviews.length <= 1"
+                    (click)="nextPhoto()">
+                    &#10095;
+                </button>
+
+                </div>
+
+                <p class="photo-counter">
+                Foto {{ currentPhotoIndex + 1 }} von {{ photoPreviews.length }}
+                </p>
+            } @else {
+                <div class="no-photo">
+                Kein Produktfoto vorhanden
+                </div>
+            }
+
+            <input
+                #fileInput
+                type="file"
+                accept="image/jpeg,image/png,image/webp"
+                multiple
+                hidden
+                (change)="onFilesSelected($event)">
+
+            <button
+                mat-stroked-button
+                type="button"
+                [disabled]="photoPreviews.length >= 4 || saving"
+                (click)="fileInput.click()">
+                Fotos auswählen (max. 4)
+            </button>
+
+            @if (errorMessage) {
+                <p class="error-message">{{ errorMessage }}</p>
+            }
+            </div>
+
+
+          <!-- Name -->
+
+          <mat-form-field appearance="outline">
+
+            <mat-label>Name</mat-label>
+
+            <input
+              matInput
+              [(ngModel)]="product.name"
+              name="name">
+
+          </mat-form-field>
+
+
+          <!-- Beschreibung -->
+
+          <mat-form-field appearance="outline">
+
+            <mat-label>Beschreibung</mat-label>
+
+            <textarea
+              matInput
+              rows="4"
+              [(ngModel)]="product.description"
+              name="description">
+            </textarea>
+
+          </mat-form-field>
+
+
+          <!-- Preis -->
+
+          <mat-form-field appearance="outline">
+
+            <mat-label>Preis</mat-label>
+
+            <input
+              matInput
+              type="number"
+              [(ngModel)]="product.price"
+              name="price">
+
+          </mat-form-field>
+
+
+          <!-- Lagerbestand -->
+
+          <mat-form-field appearance="outline">
+
+            <mat-label>Lagerbestand</mat-label>
+
+            <input
+              matInput
+              type="number"
+              [(ngModel)]="product.stock"
+              name="stock">
+
+          </mat-form-field>
+
+        </form>
+
+      </mat-card-content>
+
+
+      <!-- Buttons -->
+
+      <mat-card-actions>
+
+        <button
+          mat-button
+          type="button"
+          [disabled]="saving"
+          (click)="cancel()">
+
+          Abbrechen
+
+        </button>
+
+
+        <button
+          mat-raised-button
+          type="button"
+          [disabled]="saving"
+          (click)="updateProduct()">
+
+          {{ saving ? 'Speichern...' : 'Änderungen speichern' }}
+
+        </button>
+
+      </mat-card-actions>
+
+    </mat-card>
+
+  } @else {
+
+    <p>Produkt wird geladen...</p>
+
+  }
+
+</div>

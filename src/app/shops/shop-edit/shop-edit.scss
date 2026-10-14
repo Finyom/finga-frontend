@@ -1,0 +1,56 @@
+.shop-card {
+  width: 100%;
+  max-width: none;
+  box-sizing: border-box;
+  height: 100%;
+  max-height: none;
+}
+
+mat-form-field {
+  width: 100%;
+  margin-top: 16px;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.error-message {
+  margin-top: 16px;
+  padding: 12px;
+  border-radius: 4px;
+  background-color: #ffebee;
+  color: #b71c1c;
+}
+
+.photo-section {
+  width: 100%;
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid #ddd;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.photo-section h3 {
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.shop-photo-preview {
+  display: block;
+  width: 400px;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+.photo-section button {
+  margin: 5px;
+}

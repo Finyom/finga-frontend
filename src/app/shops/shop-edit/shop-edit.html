@@ -1,0 +1,181 @@
+
+@if (isLoading) {
+
+  <mat-card class="shop-card">
+
+    <mat-card-content>
+      Shop wird geladen...
+    </mat-card-content>
+
+  </mat-card>
+
+} @else {
+    <mat-card class="shop-card">
+
+    <mat-card-header>
+
+        <mat-card-title>
+        Shop bearbeiten
+        </mat-card-title>
+
+        <mat-card-subtitle>
+        Shop-ID: {{ shopId }}
+        </mat-card-subtitle>
+
+    </mat-card-header>
+
+
+    <mat-card-content>
+
+        <form
+        #shopForm="ngForm"
+        (ngSubmit)="updateShop(shopForm)">
+
+        <!-- Name -->
+
+        <mat-form-field appearance="outline">
+
+            <mat-label>Shopname</mat-label>
+
+            <input
+            matInput
+            name="name"
+            [(ngModel)]="shop.name"
+            required
+            maxlength="120"
+            #name="ngModel"
+            />
+
+            @if (name.invalid && name.touched) {
+
+            <mat-error>
+                Bitte geben Sie einen Shopnamen ein.
+            </mat-error>
+
+            }
+
+        </mat-form-field>
+
+
+        <!-- Beschreibung -->
+
+        <mat-form-field appearance="outline">
+
+            <mat-label>Beschreibung</mat-label>
+
+            <textarea
+            matInput
+            name="description"
+            [(ngModel)]="shop.description"
+            maxlength="500"
+            rows="4">
+            </textarea>
+
+        </mat-form-field>
+
+
+        <!-- Adresse -->
+
+        <mat-form-field appearance="outline">
+
+            <mat-label>Adresse</mat-label>
+
+            <input
+            matInput
+            name="address"
+            [(ngModel)]="shop.address"
+            required
+            maxlength="255"
+            #address="ngModel"
+            />
+
+            @if (address.invalid && address.touched) {
+
+            <mat-error>
+                Bitte geben Sie eine Adresse ein.
+            </mat-error>
+
+            }
+
+        </mat-form-field>
+
+
+        <!-- Fehler -->
+
+        @if (errorMessage) {
+
+            <div class="error-message">
+            {{ errorMessage }}
+            </div>
+
+        }
+        
+        <div class="photo-section">
+
+            <h3>Shop-Foto</h3>
+
+            @if (photoPreview) {
+
+                <img
+                [src]="photoPreview"
+                alt="Vorschau des Shop-Fotos"
+                class="shop-photo-preview">
+
+            }
+
+            <input
+                #fileInput
+                type="file"
+                accept="image/jpeg,image/png,image/webp"
+                hidden
+                (change)="onFileSelected($event)">
+
+            <button
+                mat-raised-button
+                type="button"
+                (click)="fileInput.click()">
+
+                Foto auswählen
+
+            </button>
+
+            @if (selectedFile) {
+
+                <p class="selected-file">
+                Ausgewählte Datei: {{ selectedFile.name }}
+                </p>
+
+            }
+
+        </div>
+
+
+        <!-- Buttons -->
+
+        <div class="actions">
+
+            <button
+            mat-stroked-button
+            type="button"
+            (click)="cancel()"
+            >
+            Abbrechen
+            </button>
+
+
+            <button
+            mat-raised-button
+            type="submit"
+            [disabled]="shopForm.invalid || isSaving"
+            >
+            {{ isSaving ? 'Speichern...' : 'Änderungen speichern' }}
+            </button>
+
+        </div>
+
+        </form>
+
+    </mat-card-content>
+
+    </mat-card>
+}

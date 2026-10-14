@@ -1,0 +1,153 @@
+<div class="product-container">
+
+  <div class="product-header">
+    <div class="title-section">
+      <h1>Produkte</h1>
+
+      @if (canAddProduct()) {
+        <button
+          mat-raised-button
+          (click)="addProduct()">
+          Produkt hinzufügen
+        </button>
+      }
+    </div>
+
+    <mat-form-field appearance="outline" class="search-field">
+      <mat-label>Produkte suchen</mat-label>
+      <mat-icon matPrefix>search</mat-icon>
+
+      <input
+        matInput
+        type="text"
+        [(ngModel)]="searchText"
+        (ngModelChange)="currentPage = 0"
+        placeholder="Produkt suchen..." />
+
+      @if (searchText) {
+        <button
+          mat-icon-button
+          matSuffix
+          type="button"
+          (click)="searchText = ''; currentPage = 0">
+          <mat-icon>close</mat-icon>
+        </button>
+      }
+    </mat-form-field>
+
+    <button
+      mat-raised-button
+      type="button"
+      (click)="openCart()">
+      <mat-icon>shopping_cart</mat-icon>
+      Warenkorb
+    </button>
+  </div>
+
+  <!-- Meldung nach einer Warenkorb-Aktion -->
+  @if (cartMessage) {
+    <div class="success-message" role="status">
+      {{ cartMessage }}
+    </div>
+  }
+
+  @if (cartError) {
+    <div class="error-message" role="alert">
+      <p>{{ cartError }}</p>
+
+      @if (cartError.includes('registrieren')) {
+        <button
+            mat-raised-button
+            color="primary"
+            type="button"
+            (click)="goToLogin()">
+            Zur Anmeldung
+        </button>
+      }
+    </div>
+  }
+
+  <mat-card class="count-card">
+    <mat-card-content>
+      <strong>{{ filteredProducts.length }}</strong>
+      Produkte gefunden
+    </mat-card-content>
+  </mat-card>
+
+  @if (filteredProducts.length === 0) {
+    <mat-card class="empty-card">
+      <mat-card-content>
+        <mat-icon>inventory_2</mat-icon>
+        <p>Keine Produkte gefunden.</p>
+      </mat-card-content>
+    </mat-card>
+  } @else {
+    <div class="product-list">
+      @for (product of paginatedProducts; track product.id) {
+        <mat-card
+          class="product-card"
+          (click)="openProduct(product.id)">
+
+          <!-- Produktfoto -->
+          <div class="product-photo">
+            <img
+              [src]="photoUrl(product)"
+              [alt]="product.name">
+          </div>
+
+          <!-- Produktinformationen -->
+          <mat-card-content>
+            <mat-card-title>
+              {{ product.name }}
+            </mat-card-title>
+
+            <p>{{ product.description }}</p>
+
+            <p class="product-price">
+              {{ product.price }} €
+            </p>
+
+            <p>
+              Lagerbestand: {{ product.stock }}
+            </p>
+
+            <button
+              mat-raised-button
+              color="primary"
+              type="button"
+              [disabled]="product.stock <= 0 || addingProductId === product.id"
+              (click)="$event.stopPropagation(); addToCart(product.id)">
+
+              <mat-icon>add_shopping_cart</mat-icon>
+
+              @if (addingProductId === product.id) {
+                Wird hinzugefügt...
+              } @else {
+                In den Warenkorb
+              }
+            </button>
+          </mat-card-content>
+        </mat-card>
+      }
+    </div>
+  }
+
+  <div class="pagination-container">
+    <mat-paginator
+      [length]="filteredProducts.length"
+      [pageSize]="pageSize"
+      [pageSizeOptions]="[5, 10, 20]"
+      (page)="onPageChange($event)">
+    </mat-paginator>
+  </div>
+
+  <div>
+    <button
+      mat-raised-button
+      type="button"
+      (click)="goBack()">
+      Zurück
+    </button>
+  </div>
+
+</div>
