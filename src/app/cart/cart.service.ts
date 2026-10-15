@@ -1,6 +1,8 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment.prod';
+
 
 export interface CartItem {
   id: number;
@@ -25,7 +27,7 @@ export interface CartResponse {
 })
 export class CartService {
   private readonly http = inject(HttpClient);
-  private readonly apiUrl = 'http://localhost:8080/api/shops';
+  private readonly apiUrl = `${environment.apiUrl}/api/shops`;
 
   getCart(shopId: number): Observable<CartResponse> {
     return this.http.get<CartResponse>(

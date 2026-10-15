@@ -17,6 +17,8 @@ import { AuthService } from '../../auth/services/auth';
 import { CurrentUser } from '../../auth/models/current-user';
 import { MatIconModule } from '@angular/material/icon';
 import { CartService } from '../../cart/cart.service';
+import { environment } from '../../../environments/environment.prod';
+
 
 
 @Component({
@@ -189,7 +191,7 @@ export class ProductDetail implements OnInit {
       return 'assets/default-product.jpg';
     }
 
-    return `http://localhost:8080/uploads/${photoPath}`;
+    return `${environment.apiUrl}/uploads/${photoPath}`;
   }
 
   // Fallback für ältere Produkte mit nur einem Foto
@@ -198,7 +200,7 @@ export class ProductDetail implements OnInit {
       return 'assets/default-product.jpg';
     }
 
-    return `http://localhost:8080/uploads/${product.photoPath}?t=${product.updatedAt}`;
+    return `${environment.apiUrl}/uploads/${product.photoPath}?t=${product.updatedAt}`;
   }
 
   canDeleteProduct(): boolean {

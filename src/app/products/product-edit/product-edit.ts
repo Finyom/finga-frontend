@@ -17,6 +17,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { HttpErrorResponse } from '@angular/common/http';
 
 import { ProductService } from '../services/product';
+
+import { environment } from '../../../environments/environment.prod';
+
 import {
   Product,
   UpdateProductRequest
@@ -99,7 +102,7 @@ export class ProductEdit implements OnInit, OnDestroy {
           // Deshalb kann hier nur ein vorhandenes Foto angezeigt werden.
           if (product.photoPath) {
             this.photoPreviews = [
-              `http://localhost:8080/uploads/${product.photoPath}`
+              `${environment.apiUrl}/uploads/${product.photoPath}`
             ];
           }
 
