@@ -43,6 +43,7 @@ export class ProductEdit implements OnInit, OnDestroy {
   private readonly router = inject(Router);
   private readonly productService = inject(ProductService);
   private readonly cdr = inject(ChangeDetectorRef);
+  private readonly apiUrl = `${environment.apiUrl}/uploads`;
 
   shopId!: number;
   productId!: number;
@@ -102,7 +103,7 @@ export class ProductEdit implements OnInit, OnDestroy {
           // Deshalb kann hier nur ein vorhandenes Foto angezeigt werden.
           if (product.photoPath) {
             this.photoPreviews = [
-              `${environment.apiUrl}/uploads/${product.photoPath}`
+              `this.apiUrl}/${product.photoPath}`
             ];
           }
 

@@ -39,6 +39,7 @@ export class ProductDetail implements OnInit {
   private readonly cdr = inject(ChangeDetectorRef);
   private readonly authService = inject(AuthService);
   private readonly cartService = inject(CartService);
+  private readonly apiUrl = `${environment.apiUrl}/uploads`;
   
   cartMessage = '';
   cartError = '';
@@ -191,7 +192,7 @@ export class ProductDetail implements OnInit {
       return 'assets/default-product.jpg';
     }
 
-    return `${environment.apiUrl}/uploads/${photoPath}`;
+    return `this.apiUrl}/${photoPath}`;
   }
 
   // Fallback für ältere Produkte mit nur einem Foto
@@ -200,7 +201,7 @@ export class ProductDetail implements OnInit {
       return 'assets/default-product.jpg';
     }
 
-    return `${environment.apiUrl}/uploads/${product.photoPath}?t=${product.updatedAt}`;
+    return `this.apiUrl}/${product.photoPath}?t=${product.updatedAt}`;
   }
 
   canDeleteProduct(): boolean {

@@ -50,6 +50,7 @@ export class ProductList implements OnInit {
   private readonly router = inject(Router);
   private readonly authService = inject(AuthService);
   private readonly cartService = inject(CartService);
+  private readonly apiUrl = `${environment.apiUrl}/uploads`;
 
   cartMessage = '';
   cartError = '';
@@ -185,7 +186,7 @@ export class ProductList implements OnInit {
       return 'assets/default-product.jpg';
     }
 
-    return `${environment.apiUrl}/uploads/${product.photoPath}?t=${product.updatedAt}`;
+    return `this.apiUrl}/${product.photoPath}?t=${product.updatedAt}`;
   }
 
   get paginatedProducts(): Product[] {
