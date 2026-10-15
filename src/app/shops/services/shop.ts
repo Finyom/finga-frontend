@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { Shop } from '../models/shop';
+import { environment } from '../../../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class ShopService {
 
   private readonly http = inject(HttpClient);
 
-  private readonly apiUrl = 'http://localhost:8080/api/shops';
+  private apiUrl = `${environment.apiUrl}/api/shops`;
 
   getShops(): Observable<Shop[]> {
     return this.http.get<Shop[]>(this.apiUrl);

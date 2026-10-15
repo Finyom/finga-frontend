@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { Product, UpdateProductRequest, CreateProductRequest} from '../models/product';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class ProductService {
 
   private readonly http = inject(HttpClient);
 
-  private readonly apiUrl ='http://localhost:8080/api/shops';
+  private readonly apiUrl = `${environment.apiUrl}/api/shops`;
 
 
   // GET: Alle Produkte eines Shops
