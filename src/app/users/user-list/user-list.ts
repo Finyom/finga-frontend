@@ -79,7 +79,6 @@ export class UserList implements OnInit {
       });
   }
 
-
   private loadUsers(): void {
 
     this.userService
