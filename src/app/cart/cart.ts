@@ -14,7 +14,7 @@ import {
   CartService,
   CartResponse,
   CartItem
-} from './cart.service';
+} from './services/cart.service';
 import { Router } from '@angular/router';
 
 @Component({

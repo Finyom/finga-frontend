@@ -12,7 +12,7 @@ export class UserService {
 
   private readonly http = inject(HttpClient);
 
-  private readonly apiUrl = `${environment.apiUrl}/api/users`;
+  private readonly apiUrl = `${environment.apiUrl}/users`;
 
 
   /**

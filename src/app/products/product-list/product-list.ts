@@ -23,7 +23,9 @@ import { Router } from '@angular/router';
 import { CurrentUser } from '../../auth/models/current-user';
 import { PageEvent } from '@angular/material/paginator';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { CartService } from '../../cart/cart.service';
+import { CartService } from '../../cart/services/cart.service';
+import { environment } from '../../../environments/environment.prod';
+
 
 @Component({
   selector: 'app-product-list',
@@ -183,7 +185,7 @@ export class ProductList implements OnInit {
       return 'assets/default-product.jpg';
     }
 
-    return `http://localhost:8080/uploads/${product.photoPath}?t=${product.updatedAt}`;
+    return `${environment.apiUrl}/uploads/${product.photoPath}?t=${product.updatedAt}`;
   }
 
   get paginatedProducts(): Product[] {

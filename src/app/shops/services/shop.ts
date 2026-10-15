@@ -12,7 +12,7 @@ export class ShopService {
 
   private readonly http = inject(HttpClient);
 
-  private apiUrl = `${environment.apiUrl}/api/shops`;
+  private apiUrl = `${environment.apiUrl}/shops`;
 
   getShops(): Observable<Shop[]> {
     return this.http.get<Shop[]>(this.apiUrl);

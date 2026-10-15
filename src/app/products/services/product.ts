@@ -12,7 +12,7 @@ export class ProductService {
 
   private readonly http = inject(HttpClient);
 
-  private readonly apiUrl = `${environment.apiUrl}/api/shops`;
+  private readonly apiUrl = `${environment.apiUrl}/shops`;
 
 
   // GET: Alle Produkte eines Shops
