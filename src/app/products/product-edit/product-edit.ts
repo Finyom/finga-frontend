@@ -18,7 +18,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 
 import { ProductService } from '../services/product';
 
-import { environment } from '../../../environments/environment.prod';
+import { environment } from '../../../environments/environment';
 
 import {
   Product,

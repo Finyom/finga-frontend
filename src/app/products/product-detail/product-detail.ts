@@ -17,7 +17,7 @@ import { AuthService } from '../../auth/services/auth';
 import { CurrentUser } from '../../auth/models/current-user';
 import { MatIconModule } from '@angular/material/icon';
 import { CartService } from '../../cart/services/cart.service';
-import { environment } from '../../../environments/environment.prod';
+import { environment } from '../../../environments/environment';
 
 
 
