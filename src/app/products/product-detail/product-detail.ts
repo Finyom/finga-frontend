@@ -127,6 +127,7 @@ export class ProductDetail implements OnInit {
     if (this.currentUser.role === 'USER_ADMIN') {
       return this.currentUser.shopIds.includes(this.shopId);
     }
+    this.cdr.detectChanges();
 
     return false;
   }
@@ -216,7 +217,7 @@ export class ProductDetail implements OnInit {
     if (this.currentUser.role === 'USER_ADMIN') {
       return this.currentUser.shopIds.includes(this.shopId);
     }
-
+    this.cdr.detectChanges();
     return false;
   }
 
