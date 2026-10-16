@@ -103,7 +103,7 @@ export class ProductEdit implements OnInit, OnDestroy {
           // Deshalb kann hier nur ein vorhandenes Foto angezeigt werden.
           if (product.photoPath) {
             this.photoPreviews = [
-              `this.apiUrl}/${product.photoPath}`
+              `§{this.apiUrl}/${product.photoPath}`
             ];
           }
 

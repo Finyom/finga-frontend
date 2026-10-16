@@ -192,7 +192,7 @@ export class ProductDetail implements OnInit {
       return 'assets/default-product.jpg';
     }
 
-    return `this.apiUrl}/${photoPath}`;
+    return `${this.apiUrl}/${photoPath}`;
   }
 
   // Fallback für ältere Produkte mit nur einem Foto
@@ -201,7 +201,7 @@ export class ProductDetail implements OnInit {
       return 'assets/default-product.jpg';
     }
 
-    return `this.apiUrl}/${product.photoPath}?t=${product.updatedAt}`;
+    return `${this.apiUrl}/${product.photoPath}?t=${product.updatedAt}`;
   }
 
   canDeleteProduct(): boolean {

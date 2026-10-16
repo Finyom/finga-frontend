@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
@@ -29,6 +29,8 @@ export class Login {
   private readonly authService = inject(AuthService);
   private readonly shopService = inject(ShopService);
   private readonly router = inject(Router);
+  private readonly cdr = inject(ChangeDetectorRef);
+
 
   // Login
   login = '';
@@ -38,6 +40,8 @@ export class Login {
   username = '';
   email = '';
   registerPassword = '';
+  successMessage = '';
+  errorMessage = '';
 
   // Login oder Registrierung anzeigen
   isRegisterMode = false;
@@ -72,19 +76,39 @@ export class Login {
       password: this.registerPassword
     };
 
+    console.log('Username:', request.username);
+    console.log('E-Mail:', request.email);
+
     this.authService.register(request).subscribe({
-      next: (response) => {
-        console.log('Registrierung erfolgreich');
+      
+      
+      next: () => {
+        // Erfolgsmeldung anzeigen
+        this.successMessage = 'Registrierung erfolgreich! Bitte melden Sie sich an.';
 
-        // JWT speichern
-        localStorage.setItem('token', response.token);
-
-        // Nach Registrierung zu den Shops
-        this.router.navigate(['/shops']);
+        // Nach 2 Sekunden zur Login-Seite weiterleiten
+        setTimeout(() => {
+          this.router.navigate(['/login'], {
+            state: { successMessage: this.successMessage }
+          });
+        }, 1000);
+        this.showLogin();
       },
       error: (error) => {
-        console.error('Registrierung fehlgeschlagen', error);
+        console.error('Registrierung fehlgeschlagen:', error);
+
+        if (error.status === 409) {
+          this.errorMessage =
+            'Dieser Username oder diese E-Mail-Adresse ist bereits registriert.';
+        } else {
+          this.errorMessage =
+            'Die Registrierung ist fehlgeschlagen. Bitte versuchen Sie es erneut.';
+        }
+
+        this.cdr.detectChanges();
       }
+
+
     });
   }
 

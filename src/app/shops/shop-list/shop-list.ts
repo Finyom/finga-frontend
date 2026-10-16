@@ -15,6 +15,7 @@ import { Router } from '@angular/router';
 import { ShopService } from '../services/shop';
 import { AuthService } from '../../auth/services/auth';
 import { Shop } from '../models/shop';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-shop-list',
@@ -36,6 +37,7 @@ export class ShopList implements OnInit {
   private readonly platformId = inject(PLATFORM_ID);
   private readonly cdr = inject(ChangeDetectorRef);
   private readonly authService = inject(AuthService);
+  private readonly apiUrl = `${environment.apiUrl}/uploads`;
 
   isAdmin = false;
 
@@ -144,7 +146,7 @@ export class ShopList implements OnInit {
       return 'assets/default-shop.jpg';
     }
 
-    return `http://localhost:8080/uploads/${shop.photoPath}?t=${shop.updatedAt}`;
+    return `${this.apiUrl}/${shop.photoPath}?t=${shop.updatedAt}`;
   }
 
 }
