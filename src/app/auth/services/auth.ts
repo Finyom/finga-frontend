@@ -15,18 +15,18 @@ export class AuthService {
 
   private readonly http = inject(HttpClient);
 
-  private readonly apiUrl = `${environment.apiUrl}/auth`;
+  private readonly apiUrl = `${environment.apiUrl}`;
 
   login(request: LoginRequest): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(
-      `${this.apiUrl}/login`,
+      `${this.apiUrl}/auth/login`,
       request
     );
   }
 
   register(request: RegisterRequest): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(
-      `${this.apiUrl}/register`,
+      `${this.apiUrl}/auth/register`,
       request
     );
   }
