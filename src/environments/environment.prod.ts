@@ -1,5 +1,5 @@
 
 export const environment = {
-  production: false,
+  production: true,
   apiUrl: 'https://finga-5mf5.onrender.com/api'
 };
