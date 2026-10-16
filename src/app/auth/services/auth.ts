@@ -33,7 +33,7 @@ export class AuthService {
 
   getCurrentUser(): Observable<CurrentUser> {
     return this.http.get<CurrentUser>(
-      '${this.apiUrl}/api/users/me'
+      '${this.apiUrl}/users/me'
     );
   }
   
