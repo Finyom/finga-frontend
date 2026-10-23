@@ -4,7 +4,7 @@
     <button
       mat-icon-button
       class="menu-button"
-      [matMenuTriggerFor]="navigationMenu"
+      (click)="toggleSidenav.emit()"
       aria-label="Menü öffnen"
     >
       <mat-icon>menu</mat-icon>

@@ -1,10 +1,10 @@
 import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { Header } from './layout/header/header';
+import { LayoutComponent } from './layout/layout';
 
 @Component({
-  imports: [RouterOutlet,Header],
+  imports: [LayoutComponent],
   selector: 'app-root',
+  standalone: true,
   styleUrl: './app.scss',
   templateUrl: './app.html',
 })

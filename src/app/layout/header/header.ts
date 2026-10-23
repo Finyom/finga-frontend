@@ -3,7 +3,10 @@ import {
   inject,
   OnInit,
   afterNextRender,
-  ChangeDetectorRef
+  ChangeDetectorRef,
+  EventEmitter, 
+  Output,
+  Input
 } from '@angular/core';
 
 import {
@@ -21,6 +24,8 @@ import { MatMenuModule } from '@angular/material/menu';
 
 import { AuthService } from '../../auth/services/auth';
 import { CurrentUser } from '../../auth/models/current-user';
+
+
 
 @Component({
   selector: 'app-header',
@@ -40,12 +45,14 @@ export class Header implements OnInit {
   private readonly authService = inject(AuthService);
   private readonly cdr = inject(ChangeDetectorRef);
 
-  currentUser?: CurrentUser;
+  @Input() currentUser?: CurrentUser;
+  @Input() isAuthenticated = false;
+  @Input() isAdminUser = false;
 
-  // Diese Werte bleiben während der SSR-Hydration
-  // zunächst false.
-  isAuthenticated = false;
-  isAdminUser = false;
+  @Output() toggleSidenav = new EventEmitter<void>();
+  @Output() loginRequested = new EventEmitter<void>();
+  @Output() logoutRequested = new EventEmitter<void>();
+
 
   constructor() {
 

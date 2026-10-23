@@ -1,0 +1,78 @@
+<mat-sidenav-container class="sidenav-container">
+
+  <!-- Seitliches Menü links -->
+  <mat-sidenav
+    #sidenav
+    mode="over"
+    position="start"
+    class="side-menu"
+  >
+    <div class="side-menu-header">
+      <img
+        src="/images/finga-logo.png"
+        alt="FingA Logo"
+        class="app-logo"
+      />
+    </div>
+
+    <mat-nav-list>
+      <a
+        mat-list-item
+        routerLink="/shops"
+        (click)="sidenav.close()"
+      >
+        <mat-icon matListItemIcon>store</mat-icon>
+        <span matListItemTitle>Shops</span>
+      </a>
+
+      @if (isAdminUser) {
+        <a
+          mat-list-item
+          routerLink="/users"
+          (click)="sidenav.close()"
+        >
+          <mat-icon matListItemIcon>group</mat-icon>
+          <span matListItemTitle>Benutzer</span>
+        </a>
+      }
+
+      @if (!isAuthenticated) {
+        <a
+          mat-list-item
+          (click)="login(); sidenav.close()"
+        >
+          <mat-icon matListItemIcon>login</mat-icon>
+          <span matListItemTitle>Login</span>
+        </a>
+      }
+
+      @if (isAuthenticated) {
+        <a
+          mat-list-item
+          (click)="logout(); sidenav.close()"
+        >
+          <mat-icon matListItemIcon>logout</mat-icon>
+          <span matListItemTitle>Logout</span>
+        </a>
+      }
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <!-- Hauptbereich -->
+  <mat-sidenav-content>
+    <app-header
+      ngSkipHydration
+      [currentUser]="currentUser"
+      [isAuthenticated]="isAuthenticated"
+      [isAdminUser]="isAdminUser"
+      (toggleSidenav)="sidenav.toggle()"
+      (loginRequested)="login()"
+      (logoutRequested)="logout()"
+    ></app-header>
+
+    <main class="main-content">
+      <router-outlet></router-outlet>
+    </main>
+  </mat-sidenav-content>
+
+</mat-sidenav-container>

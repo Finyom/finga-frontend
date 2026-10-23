@@ -14,123 +14,68 @@ import { ProductEdit } from './products/product-edit/product-edit';
 import { UserList } from './users/user-list/user-list';
 import { adminGuard } from './auth/admin-guard';
 import { CartComponent } from './cart/cart';
+import { LayoutComponent } from './layout/layout';
 
 
 export const routes: Routes = [
-
-  // ==========================================
-  // LOGIN
-  // ==========================================
-
+  // Login bleibt ohne Layout
   {
     path: 'login',
     component: Login
   },
 
-
-  // ==========================================
-  // ÖFFENTLICH
-  // Gast darf Shops ansehen
-  // ==========================================
-
-  {
-    path: 'shops',
-    component: ShopList
-  },
-
-
-  // ==========================================
-  // GESCHÜTZT
-  // Shop erstellen
-  // ==========================================
-
-  {
-    path: 'shops/create',
-    component: ShopCreate,
-    canActivate: [authGuard]
-  },
-
-
-  // ==========================================
-  // GESCHÜTZT
-  // Shop bearbeiten
-  // ==========================================
-
-  {
-    path: 'shops/:shopId/edit',
-    component: ShopEdit,
-    canActivate: [authGuard]
-  },
-
-
-  // ==========================================
-  // ÖFFENTLICH
-  // Produkte eines Shops ansehen
-  // ==========================================
-
-  {
-    path: 'shops/:shopId/products',
-    component: ProductList
-  },
-
-  {
-    path: 'shops/:shopId/cart',
-    component: CartComponent
-  },
-
-  // ==========================================
-  // GESCHÜTZT
-  // Produkt erstellen
-  // ==========================================
-
-  {
-    path: 'shops/:shopId/products/create',
-    component: ProductCreate,
-    canActivate: [authGuard]
-  },
-
-  // ==========================================
-  // ÖFFENTLICH
-  // Produktdetails ansehen
-  // ==========================================
-
-  {
-    path: 'shops/:shopId/products/:productId',
-    component: ProductDetail,
-  },
-
-
-  // ==========================================
-  // GESCHÜTZT
-  // Produkt bearbeiten
-  // ==========================================
-
-  {
-    path: 'shops/:shopId/products/:productId/edit',
-    component: ProductEdit,
-    canActivate: [authGuard]
-  },
-
-  // ==========================================
-  // GESCHÜTZT
-  // ADMIN-BEREICH
-  // ==========================================
-
-  {
-    path: 'users',
-    component: UserList,
-    canActivate: [adminGuard]
-  },
-
-  // ==========================================
-  // STARTSEITE
-  // ==========================================
-
+  // Alle übrigen Seiten verwenden das gemeinsame Layout
   {
     path: '',
-    redirectTo: 'shops',
-    pathMatch: 'full'
+    component: LayoutComponent,
+    children: [
+      {
+        path: 'shops',
+        component: ShopList
+      },
+      {
+        path: 'shops/create',
+        component: ShopCreate,
+        canActivate: [authGuard]
+      },
+      {
+        path: 'shops/:shopId/edit',
+        component: ShopEdit,
+        canActivate: [authGuard]
+      },
+      {
+        path: 'shops/:shopId/products',
+        component: ProductList
+      },
+      {
+        path: 'shops/:shopId/cart',
+        component: CartComponent
+      },
+      {
+        path: 'shops/:shopId/products/create',
+        component: ProductCreate,
+        canActivate: [authGuard]
+      },
+      {
+        path: 'shops/:shopId/products/:productId/edit',
+        component: ProductEdit,
+        canActivate: [authGuard]
+      },
+      {
+        path: 'shops/:shopId/products/:productId',
+        component: ProductDetail
+      },
+      {
+        path: 'users',
+        component: UserList,
+        canActivate: [adminGuard]
+      },
+      {
+        path: '',
+        redirectTo: 'shops',
+        pathMatch: 'full'
+      }
+    ]
   }
-
 ];
 
