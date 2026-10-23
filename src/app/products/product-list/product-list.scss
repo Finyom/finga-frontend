@@ -201,3 +201,12 @@
   color: #c62828;
   margin: 12px 0;
 }
+
+.back-button-container {
+  position: fixed;
+  bottom: 20px;
+  left: 24px;
+  z-index: 1000;
+  background-color: white;
+  padding: 8px 0;
+}

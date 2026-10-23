@@ -220,3 +220,12 @@ mat-card-title mat-icon {
   background-color: #eaf7ed;
   border: 1px solid #b7e2c0;
 }
+
+.back-button-container {
+  position: fixed;
+  bottom: 20px;
+  left: 24px;
+  z-index: 1000;
+  background-color: white;
+  padding: 8px 0;
+}
