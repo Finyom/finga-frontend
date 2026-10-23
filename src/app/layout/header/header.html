@@ -1,16 +1,44 @@
 <mat-toolbar
   class="app-header">
+  <div class="header-left">
+    <button
+      mat-icon-button
+      class="menu-button"
+      [matMenuTriggerFor]="navigationMenu"
+      aria-label="Menü öffnen"
+    >
+      <mat-icon>menu</mat-icon>
+    </button>
 
-  
- 
-  
-  <div class="app-title">
-    <img
-      src="/images/finga-logo.png" alt="FingA Logo"
-      class="app-logo"
-    />
+    <mat-menu #navigationMenu="matMenu">
+      <button mat-menu-item routerLink="/shops">
+        <mat-icon>store</mat-icon>
+        <span>Shops</span>
+      </button>
+
+      @if (isAdminUser) {
+        <button mat-menu-item routerLink="/users">
+          <mat-icon>group</mat-icon>
+          <span>Benutzer</span>
+        </button>
+      }
+
+      @if (!isAuthenticated) {
+        <button mat-menu-item (click)="login()">
+          <mat-icon>login</mat-icon>
+          <span>Login</span>
+        </button>
+      }
+    </mat-menu>
+
+    <div class="app-title">
+      <img
+        src="/images/finga-logo.png"
+        alt="FingA Logo"
+        class="app-logo"
+      />
+    </div>
   </div>
-
 
 
 
