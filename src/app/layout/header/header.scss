@@ -83,3 +83,23 @@ mat-toolbar button {
 .app-user mat-icon {
   margin-right: 5px;
 }
+
+
+
+.app-title {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 60px;
+  overflow: visible;
+}
+
+.app-logo {
+  display: block;
+  width: 120px;
+  height: 50px;
+  max-width: 100%;
+  object-fit: contain;
+  object-position: left center;
+  flex-shrink: 0;
+}
