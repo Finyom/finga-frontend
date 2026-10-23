@@ -210,3 +210,14 @@
   background-color: white;
   padding: 8px 0;
 }
+
+.cart-button-container {
+  position: fixed;
+  top: 100px;
+  right: 24px;
+  z-index: 1000;
+  background-color: white;
+  padding: 8px 0;
+  width: 200px;
+}
+

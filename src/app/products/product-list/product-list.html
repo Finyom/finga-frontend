@@ -1,5 +1,12 @@
 <div class="product-container">
 
+  <button
+      mat-raised-button
+      type="button"
+      (click)="openCart()" class="cart-button-container">
+      <mat-icon>shopping_cart</mat-icon>
+      Warenkorb
+    </button>
   <div class="product-header">
     <div class="title-section">
       <h1>Produkte</h1>
@@ -35,13 +42,7 @@
       }
     </mat-form-field>
 
-    <button
-      mat-raised-button
-      type="button"
-      (click)="openCart()">
-      <mat-icon>shopping_cart</mat-icon>
-      Warenkorb
-    </button>
+    
   </div>
 
   <!-- Meldung nach einer Warenkorb-Aktion -->
