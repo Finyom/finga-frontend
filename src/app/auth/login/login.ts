@@ -71,8 +71,8 @@ export class Login {
   onRegister(): void {
 
     const request: RegisterRequest = {
-      username: this.username,
-      email: this.email,
+      username: this.username.trim(),
+      email: this.email.trim().toLowerCase(),
       password: this.registerPassword
     };
 
